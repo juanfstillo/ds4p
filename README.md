@@ -65,4 +65,4 @@ Facultad de Ciencias Sociales · Universidad de Buenos Aires
 
 ---
 
-<p align="center"><sub>DS4PS · UBA · 2025</sub></p>
+<p align="center"><sub>DS4PS · UBA · 2026</sub></p>
