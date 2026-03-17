@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard BCRA - Indicadores Económicos</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Chart.js con adaptador de fechas -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <strong>📊 Dashboard BCRA</strong>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#inicio">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#graficos">Gráficos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/docs" target="_blank">API Docs</a>
+                    </li>
+                    <li class="nav-item" id="logoutBtn" style="display: none;">
+                        <button class="btn btn-outline-light btn-sm ms-2" onclick="cerrarSesion()">
+                            Cerrar Sesión
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="bg-gradient text-white py-5" id="inicio">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h1 class="display-4 mb-3 text-black-50">Indicadores Económicos de Argentina</h1>
+                    <p class="lead text-black-50">Dashboard en tiempo real de datos del Banco Central de la República Argentina</p>
+                    <p class="text-black-50">
+                        <small>Última actualización: <span id="ultimaActualizacion">Cargando...</span></small>
+                    </p>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <div class="stats-badge">
+                        <h3 id="totalRegistros" class="mb-0 text-black-50">---</h3>
+                        <p class="mb-0 text-black-50">Registros totales</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Cargando...</span>
+        </div>
+        <p class="mt-3">Cargando datos del BCRA...</p>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Iniciar Sesión</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="loginAlert" class="alert alert-danger d-none"></div>
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label for="loginEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="loginEmail" required value="admin@bcra-dashboard.com">
+                        </div>
+                        <div class="mb-3">
+                            <label for="loginPassword" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="loginPassword" required value="admin123">
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Iniciar Sesión</button>
+                    </form>
+                    <div class="mt-3 text-center">
+                        <small class="text-muted">Demo: admin@bcra-dashboard.com / admin123</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container my-5">
+        <!-- Cards de últimos valores -->
+        <section class="mb-5">
+            <h2 class="mb-4">Últimos Valores</h2>
+            <div id="ultimosValoresContainer" class="row g-4">
+                <!-- Se llenan dinámicamente con JavaScript -->
+            </div>
+        </section>
+
+        <!-- Sección de Gráficos -->
+        <section id="graficos" class="mb-5">
+            <h2 class="mb-4">Series Históricas (Últimos 30 días)</h2>
+            
+            <!-- Gráfico Tipo de Cambio -->
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">💵 Tipo de Cambio USD/ARS</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="chartTipoCambio"></canvas>
+                </div>
+            </div>
+
+            <!-- Gráfico Reservas -->
+            <div class="card mb-4">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">💰 Reservas Internacionales</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="chartReservas"></canvas>
+                </div>
+            </div>
+
+            <!-- Gráfico Inflación -->
+            <div class="card mb-4">
+                <div class="card-header bg-danger text-white">
+                    <h5 class="mb-0">📈 Inflación Mensual</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="chartInflacion"></canvas>
+                </div>
+            </div>
+
+            <!-- Gráfico Tasas de Interés -->
+            <div class="card mb-4">
+                <div class="card-header bg-warning text-white">
+                    <h5 class="mb-0">📊 Tasas de Interés</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="chartTasas"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tabla de Datos -->
+        <section class="mb-5">
+            <h2 class="mb-4">Datos Detallados</h2>
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Variable</th>
+                                    <th>Último Valor</th>
+                                    <th>Fecha</th>
+                                    <th>Unidad</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaDatos">
+                                <!-- Se llena dinámicamente -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Dashboard BCRA</h5>
+                    <p class="text-white-50">
+                        Seminario: Ciencia de Datos para Politólogos/as<br>
+                        Universidad de Buenos Aires - Facultad de Ciencias Sociales
+                    </p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="text-white-50">
+                        Datos provistos por: <a href="https://www.bcra.gob.ar/" target="_blank">BCRA</a><br>
+                        <small>Proyecto MVP - 2026</small>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="/static/app.js"></script>
+</body>
+</html>

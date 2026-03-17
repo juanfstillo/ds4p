@@ -1,0 +1,346 @@
+/* Custom CSS para Dashboard BCRA */
+
+:root {
+    --primary-color: #632024;
+    --primary-light: #7d2a2e;
+    --primary-dark: #4a181b;
+    --accent-color: #8f2d32;
+    --white: #ffffff;
+    --off-white: #f8f9fa;
+    --text-light: #e8e8e8;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--off-white);
+}
+
+/* Gradiente en header */
+.bg-gradient {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+}
+
+/* Badge de estadísticas */
+.stats-badge {
+    background-color: rgba(255, 255, 255, 0.15);
+    padding: 2rem;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+}
+
+.stats-badge h3 {
+    font-size: 3rem;
+    font-weight: bold;
+    color: white;
+}
+
+.stats-badge p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+}
+
+/* Cards de últimos valores */
+.indicator-card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(99, 32, 36, 0.15);
+    transition: all 0.3s ease;
+    height: 100%;
+    background: white;
+}
+
+.indicator-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(99, 32, 36, 0.25);
+}
+
+.indicator-card .card-body {
+    padding: 1.5rem;
+}
+
+.indicator-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.indicator-value {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+}
+
+.indicator-label {
+    font-size: 0.9rem;
+    color: #6c757d;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.indicator-date {
+    font-size: 0.75rem;
+    color: #adb5bd;
+    margin-top: 0.5rem;
+}
+
+/* Colores por tipo de indicador - todos con acento del color principal */
+.card-tipo-cambio { 
+    border-left: 5px solid var(--primary-color);
+    border-top: 1px solid rgba(99, 32, 36, 0.1);
+}
+.card-reservas { 
+    border-left: 5px solid var(--accent-color);
+    border-top: 1px solid rgba(143, 45, 50, 0.1);
+}
+.card-inflacion { 
+    border-left: 5px solid var(--primary-dark);
+    border-top: 1px solid rgba(74, 24, 27, 0.1);
+}
+.card-tasas { 
+    border-left: 5px solid var(--primary-light);
+    border-top: 1px solid rgba(125, 42, 46, 0.1);
+}
+
+/* Gráficos */
+.card canvas {
+    max-height: 400px;
+}
+
+.card-header {
+    font-weight: 600;
+    border-bottom: 2px solid rgba(99, 32, 36, 0.1);
+}
+
+/* Headers de gráficos con paleta personalizada */
+.bg-primary {
+    background-color: var(--primary-color) !important;
+}
+
+.card-header.bg-success {
+    background-color: var(--accent-color) !important;
+}
+
+.card-header.bg-danger {
+    background-color: var(--primary-dark) !important;
+}
+
+.card-header.bg-warning {
+    background-color: var(--primary-light) !important;
+    color: white !important;
+}
+
+/* Loading overlay */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.95);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.3s ease;
+}
+
+.loading-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loading-overlay .spinner-border {
+    width: 3rem;
+    height: 3rem;
+    border-color: var(--primary-color);
+    border-right-color: transparent;
+}
+
+.loading-overlay p {
+    color: var(--primary-color);
+    margin-top: 1rem;
+}
+
+/* Tabla */
+.table-responsive {
+    border-radius: 8px;
+}
+
+.table th {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+.table-dark {
+    background-color: var(--primary-color) !important;
+}
+
+.table-dark th {
+    border-color: var(--primary-light) !important;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(99, 32, 36, 0.03);
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(99, 32, 36, 0.08);
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .stats-badge h3 {
+        font-size: 2rem;
+    }
+    
+    .indicator-value {
+        font-size: 1.5rem;
+    }
+    
+    .indicator-icon {
+        font-size: 2rem;
+    }
+}
+
+/* Navbar */
+.navbar {
+    box-shadow: 0 2px 4px rgba(99, 32, 36, 0.1);
+}
+
+.navbar-dark {
+    background-color: var(--primary-color) !important;
+}
+
+.navbar-brand {
+    font-size: 1.4rem;
+}
+
+.nav-link {
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    color: var(--text-light) !important;
+}
+
+/* Footer */
+footer {
+    background-color: var(--primary-dark) !important;
+}
+
+footer a {
+    text-decoration: none;
+    transition: color 0.3s;
+    color: var(--text-light) !important;
+}
+
+footer a:hover {
+    color: var(--white) !important;
+}
+
+/* Botones */
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-light);
+    border-color: var(--primary-light);
+}
+
+.btn-primary:focus,
+.btn-primary:active {
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+    box-shadow: 0 0 0 0.25rem rgba(99, 32, 36, 0.25);
+}
+
+/* Modal */
+.modal-header {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.modal-header .btn-close {
+    filter: invert(1);
+}
+
+/* Form controls focus */
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(99, 32, 36, 0.25);
+}
+
+/* Alerts */
+.alert-danger {
+    background-color: rgba(99, 32, 36, 0.1);
+    border-color: var(--primary-color);
+    color: var(--primary-dark);
+}
+
+/* Utilidades */
+.text-white-50 {
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.text-primary {
+    color: var(--primary-color) !important;
+}
+
+.bg-primary {
+    background-color: var(--primary-color) !important;
+}
+
+/* Links */
+a {
+    color: var(--primary-color);
+}
+
+a:hover {
+    color: var(--primary-light);
+}
+
+/* Backdrop del modal más opaco y oscuro */
+.modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.75) !important;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+}
+
+.modal-backdrop.show {
+    opacity: 1 !important;
+}
+
+/* Modal sobre todo */
+.modal {
+    z-index: 9999 !important;
+}
+
+.modal-dialog {
+    z-index: 10000 !important;
+}
+
+/* Animación suave del modal */
+.modal.fade .modal-dialog {
+    transition: transform 0.3s ease-out;
+}
