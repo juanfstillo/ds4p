@@ -30,16 +30,16 @@ ds4p/
 
 ## Temas
 
-| Unidad | Tema |
-|--------|------|
-| 1 | Algoritmos y estructuras de datos |
-| 2 | Machine Learning |
-| 3 | Patrones de Diseño |
-| 4 | Python & FastAPI |
-| 5 | Bases de Datos |
-| 6 | Web Scraping |
-| 7 | APIs REST |
-| 8 | Dashboards Interactivos |
+| Unidad | Tema                              |
+| ------ | --------------------------------- |
+| 1      | Algoritmos y estructuras de datos |
+| 2      | Machine Learning                  |
+| 3      | Patrones de Diseño                |
+| 4      | Python & FastAPI                  |
+| 5      | Bases de Datos                    |
+| 6      | Web Scraping                      |
+| 7      | APIs REST                         |
+| 8      | Dashboards Interactivos           |
 
 ---
 
@@ -54,6 +54,7 @@ ds4p/
 ## Equipo docente
 
 - Juan Stillo
+- Tomás Olego
 - Manuel Miller
 - Valentina González Sixto
 
