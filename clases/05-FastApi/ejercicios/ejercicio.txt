@@ -1,0 +1,6 @@
+Basado en lo realizado en clase, agregar estos endpoints:
+Endpoint de Emergencia (/zonas/criticas):
+Deben crear una nueva ruta (endpoint) usando @app.get("/zonas/criticas"). Esta ruta no debe devolver todas las zonas, sino solamente aquellas cuyo nivel de riesgo sea mayor o igual a 0.8.
+
+Endpoint de Presupuesto (/presupuesto):
+Deben crear una ruta @app.get("/presupuesto") que sume el costo de TODAS las zonas registradas en la base de datos y devuelva un mensaje como: {"presupuesto_total_requerido": 100}.
