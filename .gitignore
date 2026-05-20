@@ -29,4 +29,5 @@ yarn-error.log
 ._*
 **/.Trashes
 /bootstrap/cache/packages.php
-/bootstrap/cache/services.php
+/bootstrap/cache/services.php.DS_Store
+.ipynb_checkpoints/
