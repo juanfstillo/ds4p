@@ -1,0 +1,53 @@
+===============================================================
+EJERCICIO PRÁCTICO: ACTUALIZACIÓN DE DOCTRINA POLÍTICA
+===============================================================
+
+Contexto:
+Tras un cambio de gabinete, asume una nueva conducción en el 
+Ministerio. La nueva gestión tiene una visión distinta y sostiene 
+que, en el contexto sociopolítico actual, el Estado debe priorizar 
+la "Visibilidad". 
+
+Su instrucción es clara: los operativos de fiscalización deben 
+enviarse primero a las zonas donde vive más gente, para que la 
+presencia del Estado sea notada por la mayor cantidad de 
+ciudadanos posible. Temporalmente, el algoritmo debe ignorar 
+el nivel de riesgo de la zona y el costo operativo.
+
+Consigna:
+Tu tarea como analista de datos y desarrollador del Ministerio 
+es modificar el Producto Mínimo Viable (API + Frontend) para 
+incorporar esta nueva estrategia política al sistema.
+
+---------------------------------------------------------------
+PASO 1: Modificación del Backend (El Archivo Central)
+---------------------------------------------------------------
+1. Abre tu archivo de FastAPI ('main.py').
+2. Ve a la sección de "Motores de Decisión".
+3. Crea una nueva función llamada 'estrategia_visibilidad' que 
+   reciba una zona como parámetro y retorne únicamente el valor 
+   de su variable 'poblacion'.
+4. Agrega esta nueva doctrina al diccionario 'catalogo_estrategias' 
+   con la clave exacta "visibilidad".
+5. Guarda el archivo (asegúrate de que Uvicorn esté corriendo y 
+   no tire errores en la terminal).
+
+---------------------------------------------------------------
+PASO 2: Modificación del Frontend (El Despacho del Ministro)
+---------------------------------------------------------------
+1. Abre tu archivo de Streamlit (ej. 'frontend.py' o 'tablero.py').
+2. Busca la línea donde creaste el componente 'st.selectbox' 
+   (donde el Ministro elige la estrategia del día).
+3. Agrega el texto "visibilidad" a la lista de opciones disponibles.
+4. Guarda el archivo.
+
+---------------------------------------------------------------
+PASO 3: Auditoría del Sistema (Testing)
+---------------------------------------------------------------
+1. Ve a la pestaña del navegador donde está corriendo el tablero 
+   de Streamlit.
+2. Selecciona la nueva estrategia "visibilidad" en el menú.
+3. Haz clic en "Ejecutar Algoritmo de Priorización".
+4. Verifica el ranking: El algoritmo debería ordenar las zonas 
+   priorizando estrictamente a la de mayor población (Palermo), 
+   seguida por Córdoba, Recoleta y finalmente San Telmo.
